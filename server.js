@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const responseTime = require('response-time');
+const morgan = require('morgan');
 
 const { quotes } = require('./data');
 const { getRandomElement, filterByValue } = require('./utils');
@@ -9,10 +9,8 @@ const PORT = process.env.PORT || 4001;
 
 app.use(express.static('public'));
 
-//Middleware
-app.use(responseTime((req, res, time) => {
-  console.log(`${req.url}: ${time / 1000}s`);
-}));
+//Morgan open source middleware for logging
+app.use(morgan('tiny'));
 
 
 app.get('/api/quotes/random', (req, res, next) => {
