@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors')
 
 const { quotes } = require('./data');
 const { getRandomElement, filterByValue } = require('./utils');
@@ -11,6 +12,7 @@ app.use(express.static('public'));
 
 //Morgan open source middleware for logging
 app.use(morgan('tiny'));
+app.use(cors());
 
 
 app.get('/api/quotes/random', (req, res, next) => {
